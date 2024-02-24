@@ -4,7 +4,7 @@ import {Typography, Grid, Box} from '@mui/material';
 const SkillsPreview = ({ skills }) => {
     return (
         <Box sx={{ textAlign: 'left' }}>
-            <Typography variant="h6" component="div" sx={{fontWeight: 'bold'}} gutterBottom>
+            <Typography variant="h6" sx={{fontWeight: 'bold'}} gutterBottom>
                 Skills
             </Typography>
             <hr/>
