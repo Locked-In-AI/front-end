@@ -1,4 +1,4 @@
-export const dummyData = {
+const dummyData = {
     personalInfo: {
         name: 'John Doe',
         address: '123 Main St, Anytown, USA',
@@ -57,3 +57,23 @@ export const dummyData = {
         }
     ]
 };
+
+const dummyCVs = [
+    {
+        title: 'CV 1',
+        created_at: '2022-01-01',
+        description: 'This is a description for CV 1'
+    },
+    {
+        title: 'CV 2',
+        created_at: '2022-02-01',
+        description: 'This is a description for CV 2'
+    },
+    {
+        title: 'CV 3',
+        created_at: '2022-03-01',
+        description: 'This is a description for CV 3'
+    }
+];
+
+export { dummyData, dummyCVs };
