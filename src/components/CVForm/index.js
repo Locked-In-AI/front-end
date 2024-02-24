@@ -5,7 +5,7 @@ import Education from "./Education";
 import Experience from "./Experience";
 import Skills from "./Skills";
 import Projects from "./Projects";
-import Preview from "./Preview";
+import Preview from "../Preview/index";
 
 const steps = ['Personal Info', 'Education', 'Experience', 'Skills', 'Projects', 'Preview'];
 
