@@ -44,9 +44,9 @@ const Preview = () => {
     const downloadPdf = () => {
     setIsGeneratingPdf(true);
     setTimeout(() => {
-        html2canvas(previewRef.current).then(canvas => {
+        html2canvas(previewRef.current, { scale: 2 }).then(canvas => { // Increase scale for higher quality
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+            const pdf = new jsPDF('p', 'mm', 'a3'); // Use larger page size
             const pageWidth = pdf.internal.pageSize.getWidth();
             const pageHeight = pdf.internal.pageSize.getHeight();
 
@@ -62,7 +62,6 @@ const Preview = () => {
 
             pdf.addImage(imgData, 'PNG', marginX, marginY, canvasWidth, canvasHeight);
 
-            // Add a one-second delay before saving the PDF
             setTimeout(() => {
                 pdf.save(`${personalInfo.name}'s Resume.pdf`);
                 setIsGeneratingPdf(false);
