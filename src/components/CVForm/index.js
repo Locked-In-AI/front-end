@@ -2,12 +2,20 @@ import { useState } from 'react';
 import { Stepper, Step, StepLabel, Button } from '@mui/material';
 import PersonalInfo from "./PersonlInfo";
 import Education from "./Education";
-// import other forms...
+import Experience from "./Experience";
+import Skills from "./Skills";
+import Projects from "./Projects";
+import Preview from "./Preview";
 
-const steps = ['Personal Info', 'Education', 'Experience', 'Skills', 'Projects'];
+const steps = ['Personal Info', 'Education', 'Experience', 'Skills', 'Projects', 'Preview'];
 
 const CVForm = () => {
     const [activeStep, setActiveStep] = useState(0);
+    const [personalInfo, setPersonalInfo] = useState({});
+    const [education, setEducation] = useState({});
+    const [experience, setExperience] = useState({});
+    const [skills, setSkills] = useState({});
+    const [projects, setProjects] = useState({});
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -17,18 +25,25 @@ const CVForm = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    const handleSubmit = () => {
+        // Handle form submission here
+        console.log('Form submitted');
+    };
+
     const getStepContent = (step) => {
         switch (step) {
             case 0:
-                return <PersonalInfo />;
+                return <PersonalInfo personalInfo={personalInfo} setPersonalInfo={setPersonalInfo} />;
             case 1:
-                return <Education />;
-            // case 2:
-            //   return <Experience />;
-            // case 3:
-            //   return <Skills />;
-            // case 4:
-            //   return <Projects />;
+                return <Education education={education} setEducation={setEducation} />;
+            case 2:
+               return <Experience experience={experience} setExperience={setExperience} />;
+            case 3:
+                return <Skills skills={skills} setSkills={setSkills} />;
+            case 4:
+               return <Projects projects={projects} setProjects={setProjects} />;
+            case 5:
+               return <Preview personalInfo={personalInfo} education={education} experience={experience} skills={skills} projects={projects} />;
             default:
                 return 'Unknown step';
         }
@@ -37,8 +52,8 @@ const CVForm = () => {
     return (
         <div>
             <Stepper activeStep={activeStep}>
-                {steps.map((label) => (
-                    <Step key={label}>
+                {steps.map((label, index) => (
+                    <Step key={label} onClick={() => setActiveStep(index)}>
                         <StepLabel>{label}</StepLabel>
                     </Step>
                 ))}
@@ -49,8 +64,8 @@ const CVForm = () => {
                     <Button disabled={activeStep === 0} onClick={handleBack}>
                         Back
                     </Button>
-                    <Button variant="contained" color="primary" onClick={handleNext}>
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    <Button variant="contained" color="primary" onClick={activeStep === steps.length - 1 ? handleSubmit : handleNext}>
+                        {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
                     </Button>
                 </div>
             </div>
