@@ -72,7 +72,7 @@ const Preview = () => {
 
     return (
         <Box className="preview"
-             sx={{ width: '100%', maxWidth: 800, mx: 'auto', my: 2, p: 2, border: '1px solid grey', borderRadius: 1 }}
+             sx={{ my: 2, p: 2}}
              ref={previewRef}>
             <PersonalInfoPreview personalInfo={personalInfo} />
             {componentOrder.map((component, index) => (
