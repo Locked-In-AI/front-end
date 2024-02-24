@@ -32,8 +32,25 @@
 
 .preview {
   font-family: "Crimson Text", serif;
-  font-weight: 400;
-  font-style: normal;
+}
+
+.component-container {
+  position: relative;
+}
+
+.move-buttons {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.pdf_hide {
+  display: none;
+}
+
+.component-container:hover .move-buttons {
+  display: block;
 }
 
 

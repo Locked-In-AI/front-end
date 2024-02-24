@@ -2,7 +2,7 @@ import { Stack, TextField, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { toCamelCase } from '../../util';
 
-const fields = ['School Name', 'Degree', 'Field Of Study', 'Start Year', 'End Year', 'Description'];
+const fields = ['School Name', 'Degree', 'Field Of Study', 'City', 'Country', 'Start Year', 'End Year', 'Description'];
 
 const Education = ({ education, setEducation }) => {
   const initialEducation = fields.reduce((obj, field) => ({ ...obj, [field]: '' }), {});

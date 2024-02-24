@@ -7,6 +7,7 @@ const SkillsPreview = ({ skills }) => {
             <Typography variant="h5" component="div" sx={{fontWeight: 'bold'}} gutterBottom>
                 Skills
             </Typography>
+            <hr/>
             <Grid container spacing={2}>
                 {skills.map((skill, index) => (
                     <Grid item xs={6} key={index}>

@@ -9,6 +9,8 @@ export const dummyData = {
         {
             degree: 'Bachelor of Science in Computer Science',
             schoolName: 'University of Anytown',
+            city: 'Anytown',
+            country: 'USA',
             startYear: '2018',
             endYear: '2022',
             description: 'Focused on software development and data structures.'
