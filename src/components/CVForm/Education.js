@@ -40,7 +40,7 @@ const Education = ({ education, setEducation }) => {
         <div key={entryIndex}>
           {fields.map((field) => (
             <Stack key={field} spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-              <TextField label={field} value={entry[field]} onChange={handleChange(entryIndex, field)} multiline={field === 'Description'} />
+              <TextField label={field} value={entry[field]} onChange={handleChange(entryIndex, field)} fullWidth />
             </Stack>
           ))}
           <Button onClick={handleRemoveEntry(entryIndex)}>Remove</Button>

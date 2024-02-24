@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Stepper, Step, StepLabel, Button } from '@mui/material';
+import {Stepper, Step, StepLabel, Button, Grid} from '@mui/material';
 import PersonalInfo from "./PersonlInfo";
 import Education from "./Education";
 import Experience from "./Experience";
 import Skills from "./Skills";
 import Projects from "./Projects";
-import Preview from "../Preview/index";
+import Preview from "../Preview";
 
 const steps = ['Personal Info', 'Education', 'Experience', 'Skills', 'Projects', 'Preview'];
 
@@ -50,26 +50,28 @@ const CVForm = () => {
     };
 
     return (
-        <div>
-            <Stepper activeStep={activeStep}>
-                {steps.map((label, index) => (
-                    <Step key={label} onClick={() => setActiveStep(index)}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
-            <div>
+        <Grid container spacing={2}>
+            <Grid item xs={12}>
+                <Stepper activeStep={activeStep}>
+                    {steps.map((label, index) => (
+                        <Step key={label} onClick={() => setActiveStep(index)}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+            </Grid>
+            <Grid item xs={12}>
                 {getStepContent(activeStep)}
-                <div>
-                    <Button disabled={activeStep === 0} onClick={handleBack}>
-                        Back
-                    </Button>
-                    <Button variant="contained" color="primary" onClick={activeStep === steps.length - 1 ? handleSubmit : handleNext}>
-                        {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
-                    </Button>
-                </div>
-            </div>
-        </div>
+            </Grid>
+            <Grid item xs={12}>
+                <Button disabled={activeStep === 0} onClick={handleBack}>
+                    Back
+                </Button>
+                <Button variant="contained" color="primary" onClick={activeStep === steps.length - 1 ? handleSubmit : handleNext}>
+                    {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
+                </Button>
+            </Grid>
+        </Grid>
     );
 };
 

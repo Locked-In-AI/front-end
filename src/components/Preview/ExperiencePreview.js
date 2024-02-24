@@ -4,7 +4,7 @@ import {Typography, Box} from '@mui/material';
 const ExperiencePreview = ({ experience }) => {
     return (
         <Box sx={{ textAlign: 'left' }}>
-            <Typography variant="h6" component="div" sx={{fontWeight: 'bold'}} gutterBottom>
+            <Typography variant="h6" sx={{fontWeight: 'bold'}} gutterBottom>
                 Experience
             </Typography>
             <hr/>
