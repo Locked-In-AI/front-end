@@ -34,6 +34,10 @@
   font-family: "Crimson Text", serif;
 }
 
+.preview p, .preview h1, .preview h2, .preview h3, .preview h4, .preview h5, .preview h6 {
+  font-family: inherit;
+}
+
 .component-container {
   position: relative;
 }
