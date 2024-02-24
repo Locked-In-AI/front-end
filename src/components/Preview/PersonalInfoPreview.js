@@ -2,8 +2,8 @@ import {Typography, Box} from '@mui/material';
 
 const PersonalInfoPreview = ({personalInfo}) => {
     return (
-        <Box>
-            <Typography variant="h4" component="div" sx={{fontWeight: 'bold'}} gutterBottom>
+        <>
+            <Typography variant="h4" sx={{fontWeight: 'bold'}}>
                 {personalInfo.name}
             </Typography>
             <Typography variant="body1" gutterBottom>
@@ -20,7 +20,7 @@ const PersonalInfoPreview = ({personalInfo}) => {
                     {personalInfo.phone}
                 </Typography>
             </Box>
-        </Box>
+        </>
     );
 };
 

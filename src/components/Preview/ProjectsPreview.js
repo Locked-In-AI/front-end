@@ -4,13 +4,13 @@ import {Typography, Box} from '@mui/material';
 const ProjectsPreview = ({ projects }) => {
     return (
         <Box sx={{ textAlign: 'left' }}>
-            <Typography variant="h6" component="div" sx={{fontWeight: 'bold'}} gutterBottom>
+            <Typography variant="h6" sx={{fontWeight: 'bold'}}>
                 Projects
             </Typography>
             <hr/>
             {projects.map((project, index) => (
                 <Box key={index} sx={{mb: 2}}>
-                    <Typography variant="body1" component="div">
+                    <Typography variant="body1" >
                         {project.projectName}
                     </Typography>
                     <Typography variant="body2">
