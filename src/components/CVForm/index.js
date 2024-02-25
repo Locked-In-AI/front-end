@@ -9,13 +9,13 @@ import Preview from "../Preview";
 
 const steps = ['Personal Info', 'Education', 'Experience', 'Skills', 'Projects', 'Preview'];
 
-const CVForm = () => {
+const CVForm = ({data= {}}) => {
     const [activeStep, setActiveStep] = useState(0);
-    const [personalInfo, setPersonalInfo] = useState({});
-    const [education, setEducation] = useState({});
-    const [experience, setExperience] = useState({});
-    const [skills, setSkills] = useState({});
-    const [projects, setProjects] = useState({});
+    const [personalInfo, setPersonalInfo] = useState(data.personalInfo || {});
+    const [education, setEducation] = useState(data.education || {});
+    const [experience, setExperience] = useState(data.experience || {});
+    const [skills, setSkills] = useState(data.skills || {});
+    const [projects, setProjects] = useState(data.projects || {});
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
