@@ -1,7 +1,7 @@
 import React from 'react';
 import {Typography, Box} from '@mui/material';
 
-const ProjectsPreview = ({ projects }) => {
+const ProjectsPreview = ({ projects= [] }) => {
     return (
         <Box sx={{ textAlign: 'left' }}>
             <Typography variant="h6" sx={{fontWeight: 'bold'}}>
