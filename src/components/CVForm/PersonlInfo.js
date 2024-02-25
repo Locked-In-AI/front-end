@@ -28,7 +28,7 @@ const PersonalInfo = ({ personalInfo, setPersonalInfo }) => {
         <>
             {fields.map((field) => (
                 <Stack key={field} spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-                    <TextField label={field} value={values[field]} onChange={handleChange(field)} fullWidth />
+                    <TextField label={field} value={values[toCamelCase(field)]} onChange={handleChange(field)} fullWidth />
                 </Stack>
             ))}
         </>
