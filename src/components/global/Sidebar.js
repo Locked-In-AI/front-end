@@ -1,102 +1,130 @@
-import { useState } from "react";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Avatar, Box, IconButton, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { deepOrange } from "@mui/material/colors";
+import {useState} from "react";
+import {
+    AppBar,
+    Box,
+    CssBaseline,
+    Divider,
+    Drawer,
+    IconButton,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Toolbar,
+    Typography
+} from "@mui/material";
+import * as Icons from '@mui/icons-material';
+import {Link} from "react-router-dom";
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
-    return (
-        <MenuItem
-            active={selected === title}
-            onClick={() => setSelected(title)}
-            icon={icon}
-        >
-            <Link to={to} style={{ textDecoration: 'none' }}>
-                <Typography>{title}</Typography>
-            </Link>
-        </MenuItem>
+const drawerWidth = 240;
+
+const menuItems = [
+    {title: "My CV's", to: "/", icon: <Icons.Dashboard/>},
+    {title: "Build CV", to: "/build", icon: <Icons.Home/>},
+    {title: "Applications", to: "/applications", icon: <Icons.Receipt/>},
+    {title: "Profile", to: "/profile", icon: <Icons.Person/>},
+    {title: "Sign Out", to: "/signout", icon: <Icons.Logout/>},
+];
+
+const SidebarComponent = (props) => {
+    const {window} = props;
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
+
+    const handleDrawerClose = () => {
+        setIsClosing(true);
+        setMobileOpen(false);
+    };
+
+    const handleDrawerTransitionEnd = () => {
+        setIsClosing(false);
+    };
+
+    const handleDrawerToggle = () => {
+        if (!isClosing) {
+            setMobileOpen(!mobileOpen);
+        }
+    };
+
+    const drawer = (
+        <div>
+            <Toolbar/>
+            <Divider/>
+            <List>
+                {menuItems.map(({title, to, icon}) => (
+                    <ListItem key={title} disablePadding sx={{display: 'flex', flexDirection: 'row', padding: '10px'}}>
+                        <Link to={to} component="button"
+                              style={{textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'row'}}>
+                            <ListItemIcon>
+                                {icon}
+                            </ListItemIcon>
+                            <ListItemText primary={title}/>
+                        </Link>
+                    </ListItem>
+                ))}
+            </List>
+        </div>
     );
-};
 
-const SidebarComponent = () => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
-    const [selected, setSelected] = useState("Dashboard");
+    const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box>
-            <Sidebar collapsed={isCollapsed}>
-                <Menu iconShape="square">
-                    <MenuItem
-                        onClick={() => setIsCollapsed(!isCollapsed)}
-                        icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
+            <AppBar
+                position="fixed"
+                sx={{
+                    width: {sm: `calc(100% - ${drawerWidth}px)`},
+                    ml: {sm: `${drawerWidth}px`},
+                }}
+            >
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{mr: 2, display: {sm: 'none'}}}
                     >
-                        {!isCollapsed && (
-                            <Box
-                                display="flex"
-                                justifyContent="space-between"
-                                alignItems="center"
-                            >
-                                <Typography variant="h5">
-                                    Your App
-                                </Typography>
-                                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                                    <MenuOutlinedIcon />
-                                </IconButton>
-                            </Box>
-                        )}
-                    </MenuItem>
-
-                    {!isCollapsed && (
-                        <Box mb="25px" display="flex" justifyContent="center" alignItems="center">
-                            <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
-                        </Box>
-                    )}
-
-                    <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-                        <Item
-                            title="Dashboard"
-                            to="/"
-                            icon={<DashboardOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Page 1"
-                            to="/page1"
-                            icon={<HomeOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Page 2"
-                            to="/page2"
-                            icon={<ReceiptOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Page 3"
-                            to="/page3"
-                            icon={<PersonOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Help"
-                            to="/help"
-                            icon={<HelpOutlineOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                    </Box>
-                </Menu>
-            </Sidebar>
+                        <Icons.Menu/>
+                    </IconButton>
+                    <Typography variant="h6" noWrap component="div">
+                        Responsive drawer
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <Box
+                component="nav"
+                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
+                aria-label="mailbox folders"
+            >
+                <Drawer
+                    container={container}
+                    variant="temporary"
+                    open={mobileOpen}
+                    onTransitionEnd={handleDrawerTransitionEnd}
+                    onClose={handleDrawerClose}
+                    ModalProps={{
+                        keepMounted: true,
+                    }}
+                    sx={{
+                        display: {xs: 'block', sm: 'none'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+                <Drawer
+                    variant="permanent"
+                    sx={{
+                        display: {xs: 'none', sm: 'block'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                    }}
+                    open
+                >
+                    {drawer}
+                </Drawer>
+            </Box>
         </Box>
     );
 };
