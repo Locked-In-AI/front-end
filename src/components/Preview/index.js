@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { Box, Button } from '@mui/material';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import PersonalInfoPreview from './PersonalInfoPreview';
 import EducationPreview from './EducationPreview';
 import ExperiencePreview from './ExperiencePreview';
 import SkillsPreview from './SkillsPreview';
 import ProjectsPreview from './ProjectsPreview';
+import generateCV from "../../utils/pdfGenerator";
 
 
 const Preview = ({personalInfo, education = [], experience=[],skills=[], projects=[] }) => {
@@ -38,32 +37,14 @@ const Preview = ({personalInfo, education = [], experience=[],skills=[], project
 
     const downloadPdf = () => {
     setIsGeneratingPdf(true);
-    setTimeout(() => {
-        html2canvas(previewRef.current, { scale: 2 }).then(canvas => { // Increase scale for higher quality
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a3'); // Use larger page size
-            const pageWidth = pdf.internal.pageSize.getWidth();
-            const pageHeight = pdf.internal.pageSize.getHeight();
-
-            const widthRatio = pageWidth / canvas.width;
-            const heightRatio = pageHeight / canvas.height;
-            const ratio = widthRatio > heightRatio ? heightRatio : widthRatio;
-
-            const canvasWidth = canvas.width * ratio;
-            const canvasHeight = canvas.height * ratio;
-
-            const marginX = (pageWidth - canvasWidth) / 2;
-            const marginY = (pageHeight - canvasHeight) / 2;
-
-            pdf.addImage(imgData, 'PNG', marginX, marginY, canvasWidth, canvasHeight);
-
-            setTimeout(() => {
-                pdf.save(`${personalInfo.name}'s Resume.pdf`);
-                setIsGeneratingPdf(false);
-            }, 1000);
+    generateCV({
+            personalInfo,
+            education,
+            experience,
+            skills,
+            projects
         });
-    }, 1000);
-};
+    };
 
     return (
         <Box className="preview"
