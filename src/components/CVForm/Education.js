@@ -1,6 +1,6 @@
 import { Stack, TextField, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { toCamelCase } from '../../util';
+import { toCamelCase } from '../../utils/strOpr';
 
 const fields = ['School Name', 'Degree', 'Field Of Study', 'City', 'Country', 'Start Year', 'End Year', 'Description'];
 
