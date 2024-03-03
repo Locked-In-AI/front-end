@@ -1,3 +1,4 @@
+import apiUrl from "./config";
 const dummyData = {
     personalInfo: {
         name: 'John Doe',
@@ -76,4 +77,19 @@ const dummyCVs = [
     }
 ];
 
-export { dummyData, dummyCVs };
+
+async function fetchCvs() {
+    const response = await fetch(`${apiUrl}cv/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+        }
+    });
+
+    const data = await response.json();
+    return response.ok ? data : null;
+}
+
+
+export { dummyData, dummyCVs, fetchCvs };
