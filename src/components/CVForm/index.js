@@ -6,17 +6,20 @@ import Experience from "./Experience";
 import Skills from "./Skills";
 import Projects from "./Projects";
 import Preview from "../Preview";
+import { useLocation } from 'react-router-dom';
 
 const steps = ['Personal Info', 'Education', 'Experience', 'Skills', 'Projects', 'Preview'];
 
 const CVForm = ({data= {}}) => {
-    const [activeStep, setActiveStep] = useState(0);
-    const [personalInfo, setPersonalInfo] = useState(data.personalInfo || {});
-    const [education, setEducation] = useState(data.education || {});
-    const [experience, setExperience] = useState(data.experience || {});
-    const [skills, setSkills] = useState(data.skills || {});
-    const [projects, setProjects] = useState(data.projects || {});
+    const {state} = useLocation();
+    const cv = state;
 
+    const [activeStep, setActiveStep] = useState(0);
+    const [personalInfo, setPersonalInfo] = useState(cv ? cv.personal_info : data.personalInfo || {});
+    const [education, setEducation] = useState(cv ? cv.education : data.education || {});
+    const [experience, setExperience] = useState(cv ? cv.experience : data.experience || {});
+    const [skills, setSkills] = useState(cv ? cv.skills : data.skills || {});
+    const [projects, setProjects] = useState(cv ? cv.projects : data.projects || {});
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
