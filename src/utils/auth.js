@@ -1,20 +1,49 @@
-import apiUrl from "../config";
+import {jwtDecode} from 'jwt-decode';
+import apiUrl from '../config';
 
-const confirmAuthentication = async () => {
+export const isAuthenticated = () => {
     const token = localStorage.getItem('accessToken');
-    if (!token) return false;
+    if (!token) {
+        return false;
+    }
 
-    const response = await fetch(`${apiUrl}token/verify`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+    try {
+        const { exp } = jwtDecode(token);
+        if (exp < new Date().getTime() / 1000) {
+            return false;
         }
-    });
+    } catch {
+        return false;
+    }
 
-    return response.ok ? (await response.json()).isValid : false;
+    return true;
 };
 
-const isAuthenticated = () => !!localStorage.getItem('accessToken');
+export const refreshToken = async () => {
+    const refresh = localStorage.getItem('refreshToken');
+    if (!refresh) {
+        return false;
+    }
 
-export {confirmAuthentication, isAuthenticated}
+    try {
+        const response = await fetch(apiUrl + 'token/refresh/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                refresh,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const { access } = await response.json();
+        localStorage.setItem('accessToken', access);
+        return true;
+    } catch {
+        return false;
+    }
+};
