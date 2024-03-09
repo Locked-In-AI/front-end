@@ -1,10 +1,10 @@
 import {Box, Button, CircularProgress, Stack, TextField} from '@mui/material';
 import {useEffect, useState} from 'react';
-import {toCamelCase} from '../../utils/strOpr';
+import {toTitleCase} from '../../utils/strOpr';
 import IconButton from '@mui/material/IconButton';
 import {FaceRetouchingNaturalRounded} from "@mui/icons-material";
 
-const fields = ['Company Name', 'Job Title', 'Start Year', 'End Year', 'Description'];
+const fields = ['company_name', 'job_title', 'start_year', 'end_year', 'description'];
 
 const Experience = ({experience, setExperience}) => {
     const initialExperience = fields.reduce((obj, field) => ({...obj, [field]: ''}), {});
@@ -17,7 +17,7 @@ const Experience = ({experience, setExperience}) => {
 
         setEntries(newEntries.map(entry => {
             return Object.entries(entry).reduce((acc, [key, value]) => {
-                acc[toCamelCase(key)] = value;
+                acc[key] = value;
                 return acc;
             }, {});
         }));
@@ -67,14 +67,14 @@ const Experience = ({experience, setExperience}) => {
                         <Stack key={field} spacing={2} direction="row" sx={{marginBottom: 4}}>
                             <Box position="relative" width="100%">
                                 <TextField
-                                    label={field}
+                                    label={toTitleCase(field)}
                                     value={entry[field]}
                                     onChange={handleChange(entryIndex, field)}
                                     fullWidth
-                                    multiline={field === 'Description'}
-                                    rows={field === 'Description' ? 4 : 1}
+                                    multiline={field === 'description'}
+                                    rows={field === 'description' ? 4 : 1}
                                 />
-                                {field === 'Description' && (
+                                {field === 'description' && (
                                     <IconButton about="Optimize"
                                         onClick={() => callApi(entry[field])}
                                         sx={{position: 'absolute', bottom: 0, right: 0}}

@@ -1,8 +1,8 @@
 import { Stack, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { toCamelCase } from '../../utils/strOpr';
+import { toTitleCase } from '../../utils/strOpr';
 
-const fields = ['Name', 'Email', 'Phone', 'Address', 'LinkedIn', 'GitHub', 'Personal Website', 'Objective'];
+const fields = ['name', 'email', 'phone', 'address', 'linkedin', 'github', 'personal_website', 'objective'];
 
 const PersonalInfo = ({ personalInfo, setPersonalInfo }) => {
     const initialValues = fields.reduce((obj, field) => ({ ...obj, [field]: '' }), {});
@@ -14,7 +14,7 @@ const PersonalInfo = ({ personalInfo, setPersonalInfo }) => {
             newValues[field] = event.target.value;
 
             return Object.entries(newValues).reduce((acc, [key, value]) => {
-                acc[toCamelCase(key)] = value;
+                acc[key] = value;
                 return acc;
             }, {});
         });
@@ -28,7 +28,7 @@ const PersonalInfo = ({ personalInfo, setPersonalInfo }) => {
         <>
             {fields.map((field) => (
                 <Stack key={field} spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-                    <TextField label={field} value={values[toCamelCase(field)]} onChange={handleChange(field)} fullWidth />
+                    <TextField label={toTitleCase(field)} value={values[field]} onChange={handleChange(field)} fullWidth />
                 </Stack>
             ))}
         </>

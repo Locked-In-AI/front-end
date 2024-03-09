@@ -1,8 +1,8 @@
 import { Stack, TextField, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { toCamelCase } from '../../utils/strOpr';
+import { toTitleCase } from '../../utils/strOpr';
 
-const fields = ['Skill Name', 'Skill Level'];
+const fields = ['skill_name', 'skill_level'];
 
 const Skills = ({ skills, setSkills }) => {
   const initialSkill = fields.reduce((obj, field) => ({ ...obj, [field]: '' }), {});
@@ -15,7 +15,7 @@ const Skills = ({ skills, setSkills }) => {
 
     setEntries(newEntries.map(entry => {
         return Object.entries(entry).reduce((acc, [key, value]) => {
-            acc[toCamelCase(key)] = value;
+            acc[key] = value;
             return acc;
         }, {});
     }));
@@ -41,7 +41,7 @@ const Skills = ({ skills, setSkills }) => {
         <div key={entryIndex}>
           {fields.map((field) => (
             <Stack key={field} spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-              <TextField label={field} value={entry[field]} onChange={handleChange(entryIndex, field)} />
+              <TextField label={toTitleCase(field)} value={entry[field]} onChange={handleChange(entryIndex, field)} />
             </Stack>
           ))}
           <Button onClick={handleRemoveEntry(entryIndex)}>Remove</Button>

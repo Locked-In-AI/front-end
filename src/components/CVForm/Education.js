@@ -1,8 +1,8 @@
 import { Stack, TextField, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { toCamelCase } from '../../utils/strOpr';
+import { toTitleCase } from '../../utils/strOpr';
 
-const fields = ['School Name', 'Degree', 'Field Of Study', 'City', 'Country', 'Start Year', 'End Year', 'Description'];
+const fields = ['school_name', 'degree', 'field_of_study', 'city', 'country', 'start_year', 'end_year', 'description'];
 
 const Education = ({ education, setEducation }) => {
   const initialEducation = fields.reduce((obj, field) => ({ ...obj, [field]: '' }), {});
@@ -14,7 +14,7 @@ const Education = ({ education, setEducation }) => {
 
     setEntries(newEntries.map(entry => {
         return Object.entries(entry).reduce((acc, [key, value]) => {
-            acc[toCamelCase(key)] = value;
+            acc[key] = value;
             return acc;
         }, {});
     }));
@@ -40,7 +40,7 @@ const Education = ({ education, setEducation }) => {
         <div key={entryIndex}>
           {fields.map((field) => (
             <Stack key={field} spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-              <TextField label={field} value={entry[field]} onChange={handleChange(entryIndex, field)} fullWidth />
+              <TextField label={toTitleCase(field)} value={entry[field]} onChange={handleChange(entryIndex, field)} fullWidth />
             </Stack>
           ))}
           <Button onClick={handleRemoveEntry(entryIndex)}>Remove</Button>
