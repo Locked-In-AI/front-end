@@ -26,7 +26,7 @@ export const refreshToken = async () => {
     }
 
     try {
-        const response = await fetch(apiUrl + 'token/refresh/', {
+        const response = await fetch(apiUrl + '/token/refresh/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,4 +46,17 @@ export const refreshToken = async () => {
     } catch {
         return false;
     }
+};
+
+export const getAccessToken = async () => {
+    if (isAuthenticated()) {
+        return localStorage.getItem('accessToken');
+    }
+
+    const refreshed = await refreshToken();
+    if (refreshed) {
+        return localStorage.getItem('accessToken');
+    }
+    //TODO: Redirect to login page
+    return null;
 };
