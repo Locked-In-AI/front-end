@@ -1,4 +1,5 @@
 import apiUrl from "./config";
+import {getAccessToken} from "./utils/auth";
 const dummyData = {
     personalInfo: {
         name: 'John Doe',
@@ -79,11 +80,13 @@ const dummyCVs = [
 
 
 async function fetchCvs() {
-    const response = await fetch(`${apiUrl}cv/`, {
+    const accessToken = await getAccessToken();
+
+    const response = await fetch(`${apiUrl}/cv/`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+            'Authorization': `Bearer ${accessToken}`
         }
     });
 
