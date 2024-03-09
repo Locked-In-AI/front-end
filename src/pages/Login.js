@@ -18,7 +18,7 @@ const Login = () => {
             return;
         }
         try {
-            const response = await fetch(apiUrl + 'token/', {
+            const response = await fetch(apiUrl + '/token/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
