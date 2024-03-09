@@ -11,10 +11,10 @@ const ExperiencePreview = ({ experience=[] }) => {
             {experience.map((exp, index) => (
                 <Box key={index} sx={{mb: 2}}>
                     <Typography variant="body1" component="div">
-                        {exp.jobTitle}, {exp.companyName}
+                        {exp.job_title}, {exp.company_name}
                     </Typography>
                     <Typography variant="body2">
-                        {exp.startYear} - {exp.endYear}
+                        {exp.start_year} - {exp.end_year}
                     </Typography>
                     <Typography variant="body2">
                         {exp.description}

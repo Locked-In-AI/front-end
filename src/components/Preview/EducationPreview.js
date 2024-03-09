@@ -11,10 +11,10 @@ const EducationPreview = ({ education =[] }) => {
             {education.map((edu, index) => (
                 <Box key={index} sx={{mb: 2}}>
                     <Typography variant="body1" component="div">
-                        {edu.degree}, {edu.schoolName}
+                        {edu.degree}, {edu.school_name}
                     </Typography>
                     <Typography variant="body2">
-                        {edu.startYear} - {edu.endYear}
+                        {edu.startYear} - {edu.end_year}
                     </Typography>
                     <Typography variant="body2">
                         {edu.description}
