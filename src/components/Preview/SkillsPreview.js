@@ -10,9 +10,9 @@ const SkillsPreview = ({ skills=[] }) => {
             <hr/>
             <Grid container spacing={2}>
                 {skills.map((skill, index) => (
-                    <Grid item xs={6} key={index}>
+                    <Grid item xs={3} key={index}>
                         <Typography variant="body2">
-                            {skill.skillName}: {skill.skillLevel}
+                            {skill.skill_name}: {skill.skill_level}
                         </Typography>
                     </Grid>
                 ))}
