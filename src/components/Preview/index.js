@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Box, Button } from '@mui/material';
+import React, {useRef, useState} from 'react';
+import {Box, Button} from '@mui/material';
 import PersonalInfoPreview from './PersonalInfoPreview';
 import EducationPreview from './EducationPreview';
 import ExperiencePreview from './ExperiencePreview';
@@ -8,16 +8,16 @@ import ProjectsPreview from './ProjectsPreview';
 import generateCV from "../../utils/pdfGenerator";
 
 
-const Preview = ({personalInfo, education = [], experience=[],skills=[], projects=[] }) => {
+const Preview = ({personalInfo, education = [], experience = [], skills = [], projects = []}) => {
 
     const [componentOrder, setComponentOrder] = useState(['Education', 'Experience', 'Skills', 'Projects']);
     const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
     const components = {
-        Education: <EducationPreview education={Array.isArray(education) ? education : []} />,
-        Experience: <ExperiencePreview experience={Array.isArray(experience) ? experience : []} />,
-        Skills: <SkillsPreview skills={Array.isArray(skills) ? skills : []} />,
-        Projects : <ProjectsPreview projects={Array.isArray(projects) ? projects : []} />
+        Education: <EducationPreview education={Array.isArray(education) ? education : []}/>,
+        Experience: <ExperiencePreview experience={Array.isArray(experience) ? experience : []}/>,
+        Skills: <SkillsPreview skills={Array.isArray(skills) ? skills : []}/>,
+        Projects: <ProjectsPreview projects={Array.isArray(projects) ? projects : []}/>
     };
 
     const moveComponent = (component, direction) => {
@@ -36,8 +36,8 @@ const Preview = ({personalInfo, education = [], experience=[],skills=[], project
     const previewRef = useRef();
 
     const downloadPdf = () => {
-    setIsGeneratingPdf(true);
-    generateCV({
+        setIsGeneratingPdf(true);
+        generateCV({
             personalInfo,
             education,
             experience,
@@ -48,17 +48,17 @@ const Preview = ({personalInfo, education = [], experience=[],skills=[], project
 
     return (
         <Box className="preview"
-             sx={{ my: 2, p: 2}}
+             sx={{my: 2, p: 2}}
              ref={previewRef}>
-            <PersonalInfoPreview personalInfo={personalInfo} />
+            <PersonalInfoPreview personalInfo={personalInfo}/>
             {componentOrder.map((component, index) => (
-                <div key={component} className="component-container">
+                <Box key={component} className="component-container" mb={4}>
                     {components[component]}
                     <div className="move-buttons">
                         <Button onClick={() => moveComponent(component, -1)}>Move Up</Button>
                         <Button onClick={() => moveComponent(component, 1)}>Move Down</Button>
                     </div>
-                </div>
+                </Box>
             ))}
             {isGeneratingPdf ? null : <Button onClick={downloadPdf}>Download as PDF</Button>}
         </Box>
