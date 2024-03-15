@@ -1,6 +1,6 @@
 import { Stack, TextField, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { toTitleCase } from '../../utils/strOpr';
+import { toTitleCase } from '../../../utils/strOpr';
 
 const fields = ['project_name', 'description', 'start_year', 'end_year', 'technologies_used'];
 

@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import {useNavigate} from 'react-router-dom';
-import {formatDate} from '../utils/dateFormatter';
+import {formatDate} from '../../../utils/dateFormatter';
 import {Box} from "@mui/material";
 
 
@@ -36,12 +36,12 @@ const CvCard = ({cv}) => {
             <CardActions>
                 <Box display="flex" justifyContent="center">
                     <IconButton onClick={() => {
-                        console.log("TODO: Implement edit CV functionality")
+                        console.log("TODO: Implement view only functionality")
                     }}>
-                        <EditIcon/>
+                        <VisibilityIcon/>
                     </IconButton>
                     <IconButton onClick={handleViewCV}>
-                        <VisibilityIcon/>
+                        <EditIcon/>
                     </IconButton>
                 </Box>
             </CardActions>

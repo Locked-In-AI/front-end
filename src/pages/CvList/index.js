@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Card, CardHeader, Skeleton, Grid} from '@mui/material';
-import { fetchCvs } from "../data";
-import CvCard from "../components/CvCard";
+import { fetchCvs } from "../../data";
+import CvCard from "./components/CvCard";
 
 const CVList = () => {
     const [data, setData] = useState([]);
