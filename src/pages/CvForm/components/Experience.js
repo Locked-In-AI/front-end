@@ -1,6 +1,6 @@
 import {Box, Button, CircularProgress, Stack, TextField} from '@mui/material';
 import {useEffect, useState} from 'react';
-import {toTitleCase} from '../../utils/strOpr';
+import {toTitleCase} from '../../../utils/strOpr';
 import IconButton from '@mui/material/IconButton';
 import {FaceRetouchingNaturalRounded} from "@mui/icons-material";
 

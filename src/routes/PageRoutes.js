@@ -1,8 +1,8 @@
 import {Route, Routes} from "react-router-dom";
-import CVForm from "../components/CVForm";
-import CvListPage from "../pages/CvListPage";
+import CVForm from "../pages/CvForm";
+import CVList from "../pages/CvList";
 import Login from "../pages/Login";
-import AuthGuard from "../components/AuthGuard";
+import AuthGuard from "./AuthGuard";
 
 
 
@@ -11,7 +11,7 @@ const PageRoutes = () => {
         <Routes>
             <Route path="/login" element={<Login/>}/>
             <Route path={"/" } element={<AuthGuard/>}>
-                <Route index element={<CvListPage/>}/>
+                <Route index element={<CVList/>}/>
                 <Route path="build" element={<CVForm/>}/>
             </Route>
         </Routes>

@@ -1,16 +1,17 @@
 import { Stack, TextField, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { toTitleCase } from '../../utils/strOpr';
+import { toTitleCase } from '../../../utils/strOpr';
 
-const fields = ['school_name', 'degree', 'field_of_study', 'city', 'country', 'start_year', 'end_year', 'description'];
+const fields = ['skill_name', 'skill_level'];
 
-const Education = ({ education, setEducation }) => {
-  const initialEducation = fields.reduce((obj, field) => ({ ...obj, [field]: '' }), {});
-  const [entries, setEntries] = useState(Array.isArray(education) && education.length > 0 ? education : [initialEducation]);
+const Skills = ({ skills, setSkills }) => {
+  const initialSkill = fields.reduce((obj, field) => ({ ...obj, [field]: '' }), {});
+  const [entries, setEntries] = useState(Array.isArray(skills) && skills.length > 0 ? skills : [initialSkill]);
 
   const handleChange = (entryIndex, field) => (event) => {
     const newEntries = [...entries];
     newEntries[entryIndex][field] = event.target.value;
+
 
     setEntries(newEntries.map(entry => {
         return Object.entries(entry).reduce((acc, [key, value]) => {
@@ -21,7 +22,7 @@ const Education = ({ education, setEducation }) => {
   };
 
   const handleAddEntry = () => {
-    setEntries([...entries, initialEducation]);
+    setEntries([...entries, initialSkill]);
   };
 
   const handleRemoveEntry = (entryIndex) => () => {
@@ -31,8 +32,8 @@ const Education = ({ education, setEducation }) => {
   };
 
   useEffect(() => {
-    setEducation(entries);
-  }, [entries, setEducation]);
+    setSkills(entries);
+  }, [entries, setSkills]);
 
   return (
     <>
@@ -40,15 +41,15 @@ const Education = ({ education, setEducation }) => {
         <div key={entryIndex}>
           {fields.map((field) => (
             <Stack key={field} spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-              <TextField label={toTitleCase(field)} value={entry[field]} onChange={handleChange(entryIndex, field)} fullWidth />
+              <TextField label={toTitleCase(field)} value={entry[field]} onChange={handleChange(entryIndex, field)} />
             </Stack>
           ))}
           <Button onClick={handleRemoveEntry(entryIndex)}>Remove</Button>
         </div>
       ))}
-      <Button onClick={handleAddEntry}>Add Entry</Button>
+      <Button onClick={handleAddEntry}>Add Skill</Button>
     </>
   );
 };
 
-export default Education;
+export default Skills;

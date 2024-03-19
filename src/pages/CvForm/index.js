@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import {Stepper, Step, StepLabel, Button, Grid} from '@mui/material';
-import PersonalInfo from "./PersonlInfo";
-import Education from "./Education";
-import Experience from "./Experience";
-import Skills from "./Skills";
-import Projects from "./Projects";
+import PersonalInfo from "./components/PersonlInfo";
+import Education from "./components/Education";
+import Experience from "./components/Experience";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
 import Preview from "../Preview";
 import { useLocation } from 'react-router-dom';
 

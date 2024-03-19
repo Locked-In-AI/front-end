@@ -1,10 +1,10 @@
 import React, {useRef, useState} from 'react';
 import {Box, Button} from '@mui/material';
-import PersonalInfoPreview from './PersonalInfoPreview';
-import EducationPreview from './EducationPreview';
-import ExperiencePreview from './ExperiencePreview';
-import SkillsPreview from './SkillsPreview';
-import ProjectsPreview from './ProjectsPreview';
+import PersonalInfoPreview from './components/PersonalInfoPreview';
+import EducationPreview from './components/EducationPreview';
+import ExperiencePreview from './components/ExperiencePreview';
+import SkillsPreview from './components/SkillsPreview';
+import ProjectsPreview from './components/ProjectsPreview';
 import generateCV from "../../utils/pdfGenerator";
 
 
