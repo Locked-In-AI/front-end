@@ -3,6 +3,7 @@ import CVForm from "../pages/CvForm";
 import CVList from "../pages/CvList";
 import Login from "../pages/Login";
 import AuthGuard from "./AuthGuard";
+import JobApplicationTracker from "../pages/JobApplicationTracker";
 
 
 
@@ -13,6 +14,7 @@ const PageRoutes = () => {
             <Route path={"/" } element={<AuthGuard/>}>
                 <Route index element={<CVList/>}/>
                 <Route path="build" element={<CVForm/>}/>
+                <Route path="job-application" element={<JobApplicationTracker/>}/>
             </Route>
         </Routes>
     )
