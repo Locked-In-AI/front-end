@@ -1,25 +1,30 @@
+import { useState, useEffect } from 'react';
 import './App.css';
 import PageRoutes from "./routes/PageRoutes";
 import Header from "./components/global/Header";
 import SidebarComponent from "./components/global/Sidebar";
 import {Grid} from "@mui/material";
 import {isAuthenticated, refreshToken} from "./utils/auth";
-import {useEffect} from "react";
 
 function App() {
-     useEffect(() => {
-        if (!isAuthenticated()) {
+    const [isAuth, setIsAuth] = useState(isAuthenticated());
+
+    useEffect(() => {
+        if (!isAuth) {
             refreshToken()
-                .then(r => console.log(r))
+                .then(r => {
+                    console.log(r);
+                    setIsAuth(isAuthenticated());
+                })
                 .catch(e => console.log(e));
         }
-    }, []);
+    }, [isAuth]);
 
     return (
         <div className="App">
-            {isAuthenticated() && <Header/>}
+            {isAuth && <Header/>}
             <Grid container spacing={2}>
-                {isAuthenticated() && (
+                {isAuth && (
                     <Grid item>
                         <SidebarComponent/>
                     </Grid>
