@@ -17,7 +17,7 @@ function generateCV(data) {
                 style: 'sectionHeader'
             },
             {
-                ul: data.education.map(edu => `${edu.degree}, ${edu.schoolName}, ${edu.city}, ${edu.country} (${edu.startYear} - ${edu.endYear}) - ${edu.description}`),
+                ul: data.education.map(edu => `${edu.degree}, ${edu.school_name}, ${edu.city}, ${edu.country} (${edu.startYear} - ${edu.endYear}) - ${edu.description}`),
                 style: 'body'
             },
             {
@@ -25,7 +25,7 @@ function generateCV(data) {
                 style: 'sectionHeader'
             },
             {
-                ul: data.experience.map(exp => `${exp.jobTitle} at ${exp.companyName} (${exp.startYear} - ${exp.endYear}) - ${exp.description}`),
+                ul: data.experience.map(exp => `${exp.jobTitle} at ${exp.company_name} (${exp.start_year} - ${exp.end_year}) - ${exp.description}`),
                 style: 'body'
             },
             {
@@ -33,7 +33,7 @@ function generateCV(data) {
                 style: 'sectionHeader'
             },
             {
-                ul: data.skills.map(skill => `${skill.skillName} - ${skill.skillLevel}`),
+                ul: data.skills.map(skill => `${skill.skill_name} - ${skill.skill_level}`),
                 style: 'body'
             },
             {
@@ -41,7 +41,7 @@ function generateCV(data) {
                 style: 'sectionHeader'
             },
             {
-                ul: data.projects.map(proj => `${proj.projectName} (${proj.startYear} - ${proj.endYear}) - ${proj.description}`),
+                ul: data.projects.map(proj => `${proj.project_name} (${proj.start_year} - ${proj.end_year}) - ${proj.description}`),
                 style: 'body'
             }
         ],
