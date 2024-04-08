@@ -94,5 +94,51 @@ async function fetchCvs() {
     return response.ok ? data : null;
 }
 
+const putCv = async (cv) => {
+    const accessToken = await getAccessToken();
 
-export { dummyData, dummyCVs, fetchCvs };
+    const response = await fetch(`${apiUrl}/cv/${cv.id}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify(cv)
+    });
+
+    return response.ok;
+
+}
+
+const fetchCv = async (id) => {
+    const accessToken = await getAccessToken();
+
+    const response = await fetch(`${apiUrl}/cv/${id}/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        }
+    });
+
+    const data = await response.json();
+    return response.ok ? data : null;
+
+}
+
+const fetchJobApplications = async () => {
+    const accessToken = await getAccessToken();
+
+    const response = await fetch(`${apiUrl}/application/job-application/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        }
+    });
+
+    const data = await response.json();
+    return response.ok ? data : null;
+}
+
+export { dummyData, dummyCVs, fetchCvs, putCv, fetchJobApplications };

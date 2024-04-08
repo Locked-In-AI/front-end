@@ -8,7 +8,7 @@ const drawerWidth = 240;
 const menuItems = [
     {title: "My CV's", to: "/", icon: <Icons.Dashboard/>},
     {title: "Build CV", to: "/build", icon: <Icons.Home/>},
-    {title: "Applications", to: "/applications", icon: <Icons.Receipt/>},
+     {title: "Job Application Tracker", to: "/job-application", icon: <Icons.Work/>},
     {title: "Profile", to: "/profile", icon: <Icons.Person/>},
     {title: "Sign Out", to: "/signout", icon: <Icons.Logout/>},
 ];
