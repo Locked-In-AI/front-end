@@ -5,8 +5,10 @@ import Education from "./components/Education";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
-import Preview from "../Preview";
+import Preview from "../CvPreview";
 import { useLocation } from 'react-router-dom';
+import {putCv} from "../../data";
+import validateCvForm  from '../../utils/validator/validateCvForm';
 
 const steps = ['Personal Info', 'Education', 'Experience', 'Skills', 'Projects', 'Preview'];
 
@@ -29,8 +31,13 @@ const CVForm = ({data= {}}) => {
     };
 
     const handleSubmit = () => {
-        // Handle form submission here
-        console.log('Form submitted');
+        const isValid = validateCvForm(personalInfo, education, experience, skills, projects);
+        if (cv && cv.id) {
+            putCv({id: cv.id ,personal_info: personalInfo, education, experience, skills, projects})
+                .catch(err => console.log(err));
+            console.log('Form submitted');
+        }
+        console.log(isValid)
     };
 
     const getStepContent = (step) => {
