@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {toTitleCase} from '../../../utils/strOpr';
 import IconButton from '@mui/material/IconButton';
 import {FaceRetouchingNaturalRounded} from "@mui/icons-material";
+import {optimizeDescription} from "../../../data";
 
 const fields = ['company_name', 'job_title', 'start_year', 'end_year', 'description'];
 
@@ -33,27 +34,19 @@ const Experience = ({experience, setExperience}) => {
         setEntries(newEntries);
     };
 
-    const callApi = (description) => {
+    const handleOptimize = (entryIndex)=>{
         setLoading(true);
-        fetch('https://backend-url.com/end-point', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                description: description,
-            }),
+        const description = entries[entryIndex].description;
+        optimizeDescription(description).then((editedDesc)=>{
+          const newEntries = [...entries];
+          newEntries[entryIndex].description = editedDesc;
+          setEntries(newEntries);
+        }).catch((error)=>{
+            console.error('Error', error)
+        }).finally(()=>{
+            setLoading(false);
         })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response data
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                setLoading(false);
-            });
-    };
+    }
 
     useEffect(() => {
         setExperience(entries);
@@ -76,7 +69,7 @@ const Experience = ({experience, setExperience}) => {
                                 />
                                 {field === 'description' && (
                                     <IconButton about="Optimize"
-                                        onClick={() => callApi(entry[field])}
+                                        onClick={() => handleOptimize(entryIndex)}
                                         sx={{position: 'absolute', bottom: 0, right: 0}}
                                         disabled={loading}
                                     >
