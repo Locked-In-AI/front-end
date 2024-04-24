@@ -7,9 +7,10 @@ import {
     TableHead,
     TablePagination,
     TableRow,
-    Chip
+    Chip,
 } from '@mui/material';
 import {fetchJobApplications} from "../../data";
+import ApplicationDetailsDialog from "./components/ApplicationDetailsDialog";
 
 const columns = [
     {id: 'companyName', label: 'Company Name'},
@@ -24,6 +25,17 @@ export default function JobApplicationTracker() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [applications, setApplications] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [selectedApplication, setSelectedApplication] = useState(null);
+
+    const handleRowClick = (application) => {
+        setSelectedApplication(application);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         fetchJobApplications().then(data => {
@@ -31,13 +43,14 @@ export default function JobApplicationTracker() {
                 companyName: item.company_name,
                 contactPerson: item.email,
                 jobTitle: item.job_title,
+                cv: item.cv,
                 location: item.website,
-                salary: '',
+                salary: item.salary,
                 url: item.job_url,
                 applicationStatus: item.status,
                 comments: item.notes,
                 dateApplied: item.created_at,
-                followUpDate: ''
+                followUpDate: item.followUpDate
             }));
             setApplications(mappedData);
         })
@@ -69,7 +82,7 @@ export default function JobApplicationTracker() {
                     </TableHead>
                     <TableBody>
                         {applications.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                            <TableRow hover role="checkbox" tabIndex={-1} key={row.companyName}>
+                            <TableRow hover role="checkbox" tabIndex={-1} key={row.companyName} onClick={() => handleRowClick(row)}>
                                 {columns.map((column) => (
                                     column.id === 'applicationStatus' ?
                                     <TableCell key={column.id}><Chip color={getStatusColor(row[column.id])} label={row[column.id]} /></TableCell> :
@@ -78,6 +91,7 @@ export default function JobApplicationTracker() {
                             </TableRow>
                         ))}
                     </TableBody>
+                    <ApplicationDetailsDialog open={open} handleClose={handleClose} application={selectedApplication} />
                 </Table>
             </TableContainer>
             <TablePagination
