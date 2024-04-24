@@ -22,13 +22,11 @@ function App() {
 
     return (
         <div className="App">
-            {isAuth && <Header/>}
+            <Header/>
             <Grid container spacing={2}>
-                {isAuth && (
                     <Grid item>
-                        <SidebarComponent/>
+                        {isAuth && (<SidebarComponent/>)}
                     </Grid>
-                )}
                 <Grid item>
                     <main className="content">
                         <PageRoutes/>
