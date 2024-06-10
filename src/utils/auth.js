@@ -1,8 +1,14 @@
 import {jwtDecode} from 'jwt-decode';
 import apiUrl from '../config';
 
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 export const isAuthenticated = () => {
-    const token = localStorage.getItem('accessToken');
+    const token = getCookie('accessToken');
     if (!token) {
         return false;
     }
@@ -20,7 +26,7 @@ export const isAuthenticated = () => {
 };
 
 export const refreshToken = async () => {
-    const refresh = localStorage.getItem('refreshToken');
+    const refresh = getCookie('refreshToken');
     if (!refresh) {
         return false;
     }
@@ -41,7 +47,7 @@ export const refreshToken = async () => {
         }
 
         const { access } = await response.json();
-        localStorage.setItem('accessToken', access);
+        document.cookie = `accessToken=${access}; path=/`; // Save new access token in cookie
         return true;
     } catch {
         return false;
@@ -50,12 +56,12 @@ export const refreshToken = async () => {
 
 export const getAccessToken = async () => {
     if (isAuthenticated()) {
-        return localStorage.getItem('accessToken');
+        return getCookie('accessToken');
     }
 
     const refreshed = await refreshToken();
     if (refreshed) {
-        return localStorage.getItem('accessToken');
+        return getCookie('accessToken');
     }
     //TODO: Redirect to login page
     return null;

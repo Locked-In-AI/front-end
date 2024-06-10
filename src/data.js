@@ -29,7 +29,7 @@ async function fetchFromApi(endpoint, method = 'GET', body = null) {
 }
 
 const optimizeDescription = async (description) => {
-    const response = await fetchFromApi('/cv/enhance', 'POST', { description });
+    const response = await fetchFromApi('/optimize/', 'POST', { "description":description });
 
     return response;
 };

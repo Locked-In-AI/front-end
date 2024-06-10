@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import './App.css';
 import PageRoutes from "./routes/PageRoutes";
 import Header from "./components/global/Header";
@@ -12,21 +12,23 @@ function App() {
     useEffect(() => {
         if (!isAuth) {
             refreshToken()
-                .then(r => {
-                    console.log(r);
+                .then(() => {
                     setIsAuth(isAuthenticated());
                 })
-                .catch(e => console.log(e));
+                .catch(error => {
+                    console.error('Error refreshing token:', error);
+                });
         }
     }, [isAuth]);
+
 
     return (
         <div className="App">
             <Header/>
             <Grid container spacing={2}>
-                    <Grid item>
-                        {isAuth && (<SidebarComponent/>)}
-                    </Grid>
+                <Grid item>
+                    {isAuth && (<SidebarComponent/>)}
+                </Grid>
                 <Grid item>
                     <main className="content">
                         <PageRoutes/>

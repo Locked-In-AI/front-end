@@ -36,6 +36,11 @@ const Login = () => {
             const {access, refresh} = await response.json();
             localStorage.setItem('accessToken', access);
             localStorage.setItem('refreshToken', refresh);
+
+            // Save tokens in cookies
+            document.cookie = `accessToken=${access}; path=/`;
+            document.cookie = `refreshToken=${refresh}; path=/`;
+
             navigator('/');
         } catch (error) {
             setErrorMessage(error.message);

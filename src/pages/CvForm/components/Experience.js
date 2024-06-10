@@ -39,7 +39,7 @@ const Experience = ({experience, setExperience}) => {
         const description = entries[entryIndex].description;
         optimizeDescription(description).then((editedDesc)=>{
           const newEntries = [...entries];
-          newEntries[entryIndex].description = editedDesc;
+          newEntries[entryIndex].description = editedDesc.processed_description;
           setEntries(newEntries);
         }).catch((error)=>{
             console.error('Error', error)
